@@ -1,3 +1,8 @@
+import React, { useState, useCallback, useEffect } from 'react';
+import { csv, scaleBand, scaleLinear, max, range } from 'd3';
+import * as d3 from 'd3';
+
+
 const width = 160;
 const height = 160;
 
@@ -5,6 +10,7 @@ const circleX = width / 2;
 const circleY = height / 2;
 const circleRadius = 30/4;
 
+const initialMousePosition = { x: width/2, y: height/2};
 const [mousePosition, setMousePosition] = useState(initialMousePosition);
 
 //use callBack not re-rendered
