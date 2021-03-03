@@ -15,21 +15,18 @@ function App() {
 }
 
 export default App;
-
 */
 import React from 'react';
 import ReactDOM from "react-dom";
-import { scaleBand, scaleLinear, max } from 'd3';
 import * as d3 from 'd3';
 import { useData } from './useData';
-import { AxisBottom } from './AxisBottom';
-import { AxisLeft } from './AxisLeft';
-import { Marks } from './Marks';
+import { CountryBar } from './CountryBar';
+import './App.css'; //necessary for css to be displayed
 
 const width = 160*5.5;
 const height = 160*4;
 
-const margin = {top:20, right:20, bottom:20, left: 250}
+const margin = {top:20, right:20, bottom:40, left: 250}
 
 const message = data => {
 	let message = '';
@@ -44,33 +41,23 @@ const App = () => {
 	const data = useData();
 	if (!data) {
 		// load loading msg if not ready
-		return <pre>Loading...</pre>
+		return <h2>Loading...</h2>
 	}
 
-	const innerHeight = height - margin.top - margin.bottom;
-	const innerWidth = width - margin.left - margin.right;
-
-	const yValue = d => d.Country;
-	const xValue = d => d.Population;
-
-	const yScale = scaleBand()
-			.domain(data.map(yValue))
-			.range([0,innerHeight]);
-		
-	const xScale = scaleLinear()
-		.domain([0, max(data, xValue)])
-		.range([0,innerWidth]);
-
 	return (
+		<>
+		<h2>hello</h2>
 		<svg width={width} height={height}>
 			{/*added keys*/}
-			<g transform={`translate(${margin.left},${margin.top})`}>
-				<AxisLeft yScale={yScale}/>
-				<AxisBottom xScale={xScale} innerHeight={innerHeight}/>
-				<Marks data={data} xScale={xScale} yScale={yScale} xValue={xValue} yValue={yValue}/>
-			</g>
+			<CountryBar 
+				data={data}
+				width={width}
+				height={height}
+				margin={margin}
+			/>
 		</svg>
-		
+		<h2>bye</h2>
+		</>
 	)
 	//return <div>Data is {data ? message(data): 'loading'}</div>
  };

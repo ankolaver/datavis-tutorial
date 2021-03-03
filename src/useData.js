@@ -10,7 +10,7 @@ export const useData = () => {
 
 		const row = (d) => {
 			//extract 2020 population
-			d.Population = +d['2020'];
+			d.Population = +d['2020'] * 1000;
 			return d
 		}
 
