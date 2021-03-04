@@ -14,6 +14,8 @@ fs.inotify.max_user_watches=524288
 Faced an error, where JavaScript compiler stated that the casing was wrong
 ![Screenshot from 2021-03-03 14-09-51.png](:/630771580df24edebd2357407621a69a)
 Similarly, the vairable name "discolored" in vsCode, indicating that it was no longer used in the scope of the function.
+
+3. Inputs must be enclosed in {} within the ()
 ## Learning Points
 
 * * *
@@ -38,7 +40,7 @@ In each file eg. `AxisBottom.js` and `AxisLeft.js`
 - Using the `export default` method
     
     - ```js
-          export default(props,strokeWidth) => (
+          export default({props,strokeWidth}) => (
           	...
             );
         ```
@@ -46,7 +48,7 @@ In each file eg. `AxisBottom.js` and `AxisLeft.js`
 - Using the `export default` at the bottom. Good if there is only one export
     
     - ```js
-        const BackgroundColor = (props,strokeWidth) => (
+        const BackgroundColor = ({props,strokeWidth}) => (
             ...
           );
         export default BackgroundColor;
@@ -74,7 +76,7 @@ src
 
 Also take note that each `return` function in a export can only export one "element". To export multiple items in a return, use the following `JSX` syntax.
 ```js
-  export const BackgroundColor = (props,strokeWidth) =>(
+  export const BackgroundColor = ({props,strokeWidth}) =>(
 	return (
 	  <>
 	  	<Feature1/>
