@@ -6,7 +6,8 @@ import * as d3 from 'd3';
 export const CountryBar = ({data, width, height, margin}) => {
 	const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
-
+	//console.log(width);
+    //console.log("data",data);
 	const yValue = d => d.Country;
 	const xValue = d => d.Population;
 

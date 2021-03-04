@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import * as d3 from 'd3';
 
-const csvUrl = 'https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv';
+const populationCSV = 'https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv';
+
 
 export const useData = () => {
 	const [data, setData] = useState(null);
@@ -14,12 +15,13 @@ export const useData = () => {
 			return d
 		}
 
-		d3.csv(csvUrl,row).then(data => {
+		d3.csv(populationCSV,row).then(data => {
 			//either null before loaded or loaded data
 			setData(data.slice(0,20));
 		
 		});
 
 	}, []);
+	
 	return data
 };

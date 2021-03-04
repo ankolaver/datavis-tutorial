@@ -20,26 +20,30 @@ import React from 'react';
 import ReactDOM from "react-dom";
 import * as d3 from 'd3';
 import { useData } from './useData';
+import { SepalData } from './SepalData';
 import { CountryBar } from './CountryBar';
 import './App.css'; //necessary for css to be displayed
+import { FlowerScatter } from './FlowerScatter';
 
-const width = 160*5.5;
-const height = 160*4;
 
-const margin = {top:20, right:20, bottom:40, left: 250}
-
-const message = data => {
+const ShowStats = data => {
 	let message = '';
 	message = message+Math.round(d3.csvFormat(data).length/1024)+' kB ';
 	message = message+data.length+' rows ';
-	message = message+data.columns.length+' columns';
+	//message = message+data.columns.length+' columns';
 	return message;
 }
-
 //function app => returns an object
 const App = () => {
+	const width = 160*5.5;
+	const height = 160*4;
+
+	const margin = {top:20, right:20, bottom:40, left: 250};
+
 	const data = useData();
-	if (!data) {
+	const sepaldata = SepalData();
+
+	if (!sepaldata || !data) {
 		// load loading msg if not ready
 		return <h2>Loading...</h2>
 	}
@@ -55,7 +59,16 @@ const App = () => {
 				height={height}
 				margin={margin}
 			/>
+			
 		</svg>
+		<svg width={width} height={height}>
+			<FlowerScatter 
+				data={sepaldata}
+				width={width}
+				height={height}
+			/>
+		</svg>
+
 		<h2>bye</h2>
 		</>
 	)

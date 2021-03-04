@@ -1,63 +1,139 @@
+## Debug Log
+
+1.  Error: ENOSPC: System limit for number of file watchers reached, watch '/home/andante-moss/Documents/datavisu/public'
+
+to solve, `nano /etc/sysctl.conf` to configure max number of file watchers in vscode
+
+```
+fs.inotify.max_user_watches=524288
+```
 
 
-## Available Scripts
+2. capitalisation / casing of items
 
-In the project directory, you can run:
+Faced an error, where JavaScript compiler stated that the casing was wrong
+![Screenshot from 2021-03-03 14-09-51.png](:/630771580df24edebd2357407621a69a)
+Similarly, the vairable name "discolored" in vsCode, indicating that it was no longer used in the scope of the function.
+## Learning Points
 
-### `yarn start`
+* * *
+===
+### React Specific
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### 1\. Importance of refactoring React Application
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+One way of refactoring is to split the codebase into multiple segments:
 
-### `yarn test`
+```
+src
+|
+|--- App.js
+|--- AxisBottom.js
+|--- AxisLeft.js		
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
 
-### `yarn build`
+In each file eg. `AxisBottom.js` and `AxisLeft.js`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Using the `export default` method
+    
+    - ```js
+          export default(props,strokeWidth) => (
+          	...
+            );
+        ```
+    - However, this means there is no way to add multiple default exports in react
+- Using the `export default` at the bottom. Good if there is only one export
+    
+    - ```js
+        const BackgroundColor = (props,strokeWidth) => (
+            ...
+          );
+        export default BackgroundColor;
+        ```
+- Using the `export` keyword at the front
+    
+    - ```js
+          export const BackgroundColor = (props,strokeWidth) => (
+          	...
+            );
+        ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Another way is to keep legacy code / other functionality in another folder
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+src
+|
+|--- App.js
+|--- AxisBottom.js
+|--- AxisLeft.js	
+|--- Old_Version
+|	   |
+|	   |-- Blah_oldfile.js
+```
 
-### `yarn eject`
+Also take note that each `return` function in a export can only export one "element". To export multiple items in a return, use the following `JSX` syntax.
+```js
+  export const BackgroundColor = (props,strokeWidth) =>(
+	return (
+	  <>
+	  	<Feature1/>
+	  	<Feature2/>
+	  </>
+  	));
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### 2\. [Using React Properties to access elements](https://reactjs.org/docs/components-and-props.html)
 
 
-### Code Splitting
+#### 3\. [Using react keys](https://reactjs.org/docs/lists-and-keys.html)
+> Keys help React identify which items have changed, are added, or are removed.
+- Basically elements should have unique identifier, if there are many of them; such as in a list
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### 4. `scaleLinear()` and `scaleBand()`
 
-### Analyzing the Bundle Size
+- scaleLinear creates a function which can be used to scale values into visual elements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- scaleBand creates a function which can be used to converts a list of items into a numerical range.
+	- eg. ["Very Poor","Poor","Neutral","Good","Excellent"] -> [10,20,30,40,50] 
 
-### Making a Progressive Web App
+#### 5. Unary Plus Operator
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- evaluates the "operand" into a number if it is not already
 
-### Advanced Configuration
+#### 6. React `maps()`
+This is similar to python's functional programming feature - map
+```js
+const halvedNumbers = numbers.map(num => {   
+    return (num * 2);   
+});  
+```
+You can also create static functions in react 
+```js
+const yValue = d => d.sepal_width;
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### 7. Transform (or translate) SVGs using group elements
+jsx code group elements
+```jsx
+<g transform={`translate(${variable1},${variable2})`}>
+	<element/>
+</g>
+```
 
-### Deployment
+===
+### General Tips regarding visualisation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `yarn build` fails to minify
+#### Natural ordering of attributes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 3 main ways of organizing 
+	- categorical (distinct categories)
+	- ordinal (have an inherent order/spectrum) 
+	- quantitative (continuous distribution)
+- ![Screenshot from 2021-03-02 15-35-39.png](:/8e21196f870741f2948f82b785d7fddc)
+    - this does not make sense as year is a ordered attribute, but the colors make it look like a categorical attribute
+    - makes more sense to mark year by luminance
+- "get it right in black and white"
+- areas to represent multiple things (cumulative chart differentiated by color) --> evolved to steam graph for better visualisation
