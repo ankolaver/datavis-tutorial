@@ -43,17 +43,28 @@ body {
   stroke: #C0C0BB;
 }
 /*apply to two classes*/
-.tick text, .leftlabels text {
+.tick text, .leftlabels text, .axis-lavel{
   fill: #908a88;
 }
-.mark {
-  fill: #0e834e;
+label {
+  color: #908a88;
 }
-text{
-  fill:rgb(229, 233, 236);
-}
+
 h2 {
   text-align: center;
   text-transform: uppercase;
   color: #4CAF50;
+}
+.axis-lavel {
+  font-weight: bold;
+}
+
+/* graph related */
+.mark {
+  fill: #0e834e;
+}
+
+.markline path{
+  stroke-width: 3;
+  stroke:#0e834e;
 }

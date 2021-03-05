@@ -19,12 +19,12 @@ export default App;
 import React from 'react';
 import ReactDOM from "react-dom";
 import * as d3 from 'd3';
-import { useData } from './useData';
-import { SepalData } from './SepalData';
-import { CountryBar } from './CountryBar';
 import './App.css'; //necessary for css to be displayed
-import { FlowerScatter } from './FlowerScatter';
 
+import { useFlower, useData, useTemp } from './useData';
+import { CountryBar } from './CountryBar';
+import { FlowerScatter } from './FlowerScatter';
+import { TempLine } from './TempLine';
 
 const ShowStats = data => {
 	let message = '';
@@ -33,6 +33,7 @@ const ShowStats = data => {
 	//message = message+data.columns.length+' columns';
 	return message;
 }
+
 //function app => returns an object
 const App = () => {
 	const width = 160*5.5;
@@ -41,9 +42,11 @@ const App = () => {
 	const margin = {top:20, right:20, bottom:40, left: 250};
 
 	const data = useData();
-	const sepaldata = SepalData();
+	const sepaldata = useFlower();
+	const tempdata = useTemp();
 
-	if (!sepaldata || !data) {
+
+	if (!sepaldata || !data || !tempdata) {
 		// load loading msg if not ready
 		return <h2>Loading...</h2>
 	}
@@ -51,7 +54,7 @@ const App = () => {
 	return (
 		<>
 		<h2>hello</h2>
-		<svg width={width} height={height}>
+		<svg width={width} height={height+200}>
 			{/*added keys*/}
 			<CountryBar 
 				data={data}
@@ -61,14 +64,22 @@ const App = () => {
 			/>
 			
 		</svg>
-		<svg width={width} height={height}>
-			<FlowerScatter 
-				data={sepaldata}
-				width={width}
+		<FlowerScatter 
+			data={sepaldata}
+			width={width}
+			height={height+200}
+			margin={margin}
+		/>
+		<svg width={width+400} height={height+100}>
+			<TempLine 
+				data={tempdata}
+				width={width+400}
 				height={height}
+				margin={margin}
 			/>
 		</svg>
-
+		<div>
+		</div>
 		<h2>bye</h2>
 		</>
 	)

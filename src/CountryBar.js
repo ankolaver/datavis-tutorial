@@ -30,6 +30,13 @@ export const CountryBar = ({data, width, height, margin}) => {
 				innerHeight={innerHeight}
 				tickFormat={n => d3.format('.2s')(n).replace('G','B')}
 			/>
+			<text
+                className="axis-lavel"
+                x={innerWidth / 2 - 90}
+                y={innerHeight + 35} 
+                >
+                Population
+            </text>
 			<Marks data={data} xScale={xScale} yScale={yScale} xValue={xValue} yValue={yValue}/>
 		</g>
 	)
