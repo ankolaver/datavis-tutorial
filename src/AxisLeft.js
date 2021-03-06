@@ -13,8 +13,9 @@ export const AxisLeft = ({yScale}) =>
         </g>
     ));
 
-export const AxisLeftFlower = ({yScale}) => 
+export const AxisLeftFlower = ({yScale, innerHeight, yAxisLabel="No label"}) => 
 yScale.ticks().map(tickValue =>  (
+    <>
     <g className="leftlabels">
     <text 
         key={tickValue}
@@ -26,4 +27,11 @@ yScale.ticks().map(tickValue =>  (
         {tickValue}
     </text>
     </g>
+    <text
+        className="axis-lavel"
+        transform={`translate(-60, ${innerHeight/2}) rotate(-90)`}
+        >
+        {yAxisLabel}    
+    </text>
+    </>
 ));

@@ -11,6 +11,7 @@ export const TempLine = ({data, width, height, margin}) => {
     //const xValue = d => d.timestamp;
     //const yValue = d => d.temperature;
     const xValue = d => d.Date;
+    const yAxisLabel = "Price"
     const yValue = d => d.SP500;
 
     //.nice() make sure values end on suitable points
@@ -28,23 +29,12 @@ export const TempLine = ({data, width, height, margin}) => {
         <g transform={`translate(${margin.left},${margin.top})`}>
             <AxisBottom
                 xScale={xScale}
+                innerWidth={innerWidth}
                 innerHeight={innerHeight}
                 tickFormat={n => d3.timeFormat("%Y")(n)}
+                xAxisLabel="Year"
             />
-            <text
-                className="axis-lavel"
-                transform={`translate(-60, ${innerHeight/2}) rotate(-90)`}
-                >
-                Price
-            </text>
-            <AxisLeftFlower yScale={yScale}/>
-            <text
-                className="axis-lavel"
-                x={innerWidth / 2 - 20}
-                y={innerHeight + 40} 
-                >
-                Date
-            </text>
+            <AxisLeftFlower yScale={yScale} innerHeight={innerHeight} yAxisLabel={yAxisLabel}/>
             <MarksStock
                 data={data}
                 xScale={xScale}

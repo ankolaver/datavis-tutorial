@@ -43,11 +43,19 @@ body {
   stroke: #C0C0BB;
 }
 /*apply to two classes*/
+/*for text class*/
 .tick text, .leftlabels text, .axis-lavel{
   fill: #908a88;
 }
-label {
+/*for label class*/
+label{ 
   color: #908a88;
+}
+
+/*for text class in color legend*/
+.colorlegend {
+  fill:#C0C0BB;
+  font-size: 1.2em;
 }
 
 h2 {
@@ -55,8 +63,9 @@ h2 {
   text-transform: uppercase;
   color: #4CAF50;
 }
-.axis-lavel {
+.axis-lavel{
   font-weight: bold;
+  font-size: 1.8em;
 }
 
 /* graph related */
@@ -64,7 +73,7 @@ h2 {
   fill: #0e834e;
 }
 
-.markline path{
+.marksstock path{
   stroke-width: 3;
   stroke:#0e834e;
 }

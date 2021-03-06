@@ -54,7 +54,7 @@ const App = () => {
 	return (
 		<>
 		<h2>hello</h2>
-		<svg width={width} height={height+200}>
+		<svg width={width} height={height+100}>
 			{/*added keys*/}
 			<CountryBar 
 				data={data}
@@ -63,10 +63,10 @@ const App = () => {
 				margin={margin}
 			/>
 			
-		</svg>
+		</svg>	
 		<FlowerScatter 
 			data={sepaldata}
-			width={width}
+			width={width+100}
 			height={height+200}
 			margin={margin}
 		/>

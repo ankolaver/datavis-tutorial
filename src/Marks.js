@@ -15,13 +15,14 @@ export const Marks = ({data, xScale, yScale, xValue, yValue}) =>
         </rect>
 ));
 
-export const MarksFlower = ({data, xScale, yScale, xValue, yValue}) => 
+export const MarksFlower = ({data, xScale, yScale, xValue, yValue, colorScale, colorValue}) => 
     data.map(d => (
         <circle
-            className="mark"
+            className="markflower"
             cx={xScale(xValue(d))}
             cy={yScale(yValue(d))}
             r={5}
+            fill={colorScale(colorValue(d))}
         >
             <title>
                 {"x = "}{format(',.3r')(xValue(d))}
@@ -34,7 +35,7 @@ export const MarksFlower = ({data, xScale, yScale, xValue, yValue}) =>
 
 export const MarksStock = ({data, xScale, yScale, xValue, yValue}) => 
     data.map(d => (
-        <g className="markline">
+        <g className="marksstock">
         <path
             fill="none"
             d={line()
@@ -43,7 +44,7 @@ export const MarksStock = ({data, xScale, yScale, xValue, yValue}) =>
             .curve(d3.curveNatural)(data)}
         />
         <circle
-            className="mark"
+            className="marksstock"
             cx={xScale(xValue(d))}
             cy={yScale(yValue(d))}
             r={3}
