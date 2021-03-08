@@ -69,9 +69,7 @@ h2 {
 }
 
 /* graph related */
-.mark {
-  fill: #0e834e;
-}
+
 
 .marksstock path{
   stroke-width: 3;

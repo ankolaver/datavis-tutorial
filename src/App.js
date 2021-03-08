@@ -70,16 +70,12 @@ const App = () => {
 			height={height+200}
 			margin={margin}
 		/>
-		<svg width={width+400} height={height+100}>
-			<TempLine 
-				data={tempdata}
-				width={width+400}
-				height={height}
-				margin={margin}
-			/>
-		</svg>
-		<div>
-		</div>
+		<TempLine 
+			data={tempdata}
+			width={width+400}
+			height={height}
+			margin={margin}
+		/>
 		<h2>bye</h2>
 		</>
 	)
