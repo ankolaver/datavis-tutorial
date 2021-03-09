@@ -1,4 +1,5 @@
 import {format, timeFormat, line} from 'd3';
+import { useMemo } from 'react';
 import * as d3 from 'd3';
 
 export const Marks = ({data, xScale, yScale, xValue, yValue}) => 
@@ -36,9 +37,11 @@ export const MarksFlower = ({data, xScale, yScale, xValue, yValue, colorScale, c
 export const MarksStock = ({data, xScale, yScale, xValue, yValue}) => {
     
     return (
+        
         data.map(d => (
-        <>
         <g className="marksstock">
+        
+        <>
         <path
             className="sppath"
             fill="none"
@@ -60,11 +63,11 @@ export const MarksStock = ({data, xScale, yScale, xValue, yValue}) => {
             {"\n"}
             {"Price = "}{format(',.3r')(yValue(d))}
         </title>
-        </g>
-        
         </>
-        ))
         
+        
+        </g>
+)) 
 )
 
 };
@@ -83,8 +86,6 @@ function findY(path, x) {
     while (target >= start && target <= pathLength) {
       var pos = path.getPointAtLength(target)
   
-      // use a threshold instead of strict equality 
-      // to handle javascript floating point precision
       if (Math.abs(pos.x - x) < 0.001) {
         return pos.y
       } else if (pos.x > x) {
@@ -95,35 +96,25 @@ function findY(path, x) {
       target = (start + end) / 2
     }
   };
-export const MarksLabel = ({data, dataLength, xScale, yScale, mouseValue, innerWidth, innerHeight}) => {
+
+
+
+export const MarksLabel = ({scaleDays, minDate, dataLength, xScale, yScale, mouseValue, innerWidth, innerHeight}) => {
     
     let spPrice = 0;
     let xPoint = 0;
 
     let xData = Math.round(((mouseValue-250)/innerWidth) * dataLength);
     
-    const maxDate = xScale.invert(innerWidth);
-    const minDate = xScale.invert(0);
-    const scaleDays = maxDate-minDate;
     const path = d3.select("[class='sppath']");
 
     const maxPrice = yScale.invert(0);
     const minPrice = yScale.invert(innerHeight);
     const scalePrice = maxPrice-minPrice;
     console.log(scalePrice);
-    /*
-    const getYValue = ({Xvalue,data}) => {
-        for(let i = 0; i < data.length; i++){
-          if(data[i].Date === Xvalue){
-            return data[i].SP500;
-          }
-        }
-      };
-    */
+    
     if ((xData>0) && (xData <= 268) && path.node()) {
         
-        //let intermediatePoint = ((mouseValue-250)/innerWidth) * pathTotalLength;
-        //xPoint = path.node().getPointAtLength(intermediatePoint).x;
         var currtime = xScale.invert(mouseValue-250)-minDate;
         //spPrice = getYValue(currtime,data);
         

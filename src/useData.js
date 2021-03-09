@@ -67,7 +67,7 @@ export const useTemp = () => {
 			return d;
 		};
 		d3.csv(sp500, row).then(data => {
-			setData(data.slice(1500));
+			setData(data.slice(1600));
 		});
 		//d3.csv(temperatureUrl, row).then(setData);
 	}, []);

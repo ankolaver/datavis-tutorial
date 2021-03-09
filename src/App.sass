@@ -1,0 +1,61 @@
+
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+// Set your brand colors
+$purple: #8e6c8a;
+$pink: #DF006c;
+$green: #5C8100;
+$orange: #E6842A;
+$blueish: #137B80;
+$white: #fff;
+$beige-independent: #708259;
+$light-grey: #C1BAA9;
+$blackish-grey: #27292e;
+    
+
+// Update Bulma's global variables
+$family-sans-serif: 'Nunito', sans-serif;
+$primary: $purple;
+$link: $pink;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+//nav-bar
+$navbar-height: 4rem;
+$navbar-padding-horizontal: 4rem;
+
+
+//container
+$gap: 16px;
+$container-offset: (4 * $gap);
+
+//progress
+$progress-indeterminate-duration: 0.08s;
+
+//box
+$scheme-invert: $white;
+$box-shadow: 0 5em 1em -0.25em rgba($scheme-invert, 0.2), 0 0px 0 1px rgba($scheme-invert, 0.2);
+
+// Update some of Bulma's component variables
+$body-background-color: $blackish-grey;
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+$title-color: $light-grey;
+
+// Import only what you need from Bulma
+@import '../node_modules/bulma/sass/utilities/_all.sass';
+@import '../node_modules/bulma/sass/base/_all.sass';
+@import '../node_modules/bulma/sass/elements/button.sass';
+@import '../node_modules/bulma/sass/elements/container.sass';
+@import '../node_modules/bulma/sass/elements/form.sass';
+@import '../node_modules/bulma/sass/elements/title.sass';
+@import '../node_modules/bulma/sass/elements/box.sass';
+@import '../node_modules/bulma/sass/elements/progress.sass';
+@import '../node_modules/bulma/sass/components/navbar.sass';
+@import '../node_modules/bulma/sass/components/message.sass';
+
+@import '../node_modules/bulma/sass/grid/columns.sass';
+
+@import '../node_modules/bulma/sass/layout/hero.sass';
+@import '../node_modules/bulma/sass/layout/section.sass';

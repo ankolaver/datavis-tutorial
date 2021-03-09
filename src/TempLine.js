@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import React, { useState , useCallback } from 'react';
+import React, { useState , useCallback , useMemo } from 'react';
 import { MarksStock, MarksLabel} from './Marks';
 import { AxisLeftFlower } from './AxisLeft';
 import { AxisBottom } from './AxisBottom';
@@ -37,9 +37,13 @@ export const TempLine = ({data, width, height, margin}) => {
         setMousePosition({ x: clientX, y: clientY });
         
       }, [setMousePosition]);
-    
+
+    const maxDate = xScale.invert(innerWidth);
+    const minDate = xScale.invert(0);
+    const scaleDays = maxDate-minDate;
+
     return (
-        <svg width={width+400} height={height+100} onMouseMove={handleMouseMove}>
+        <svg width={width} height={height} onMouseMove={handleMouseMove}>
             <g transform={`translate(${margin.left},${margin.top})`}>
                 <AxisBottom
                     xScale={xScale}
@@ -49,6 +53,8 @@ export const TempLine = ({data, width, height, margin}) => {
                     xAxisLabel="Year"
                 />
                 <AxisLeftFlower yScale={yScale} innerHeight={innerHeight} yAxisLabel={yAxisLabel}/>
+                    {useMemo( 
+                () => (
                 <MarksStock
                     data={data}
                     xScale={xScale}
@@ -56,8 +62,12 @@ export const TempLine = ({data, width, height, margin}) => {
                     xValue={xValue}
                     yValue={yValue}
                 />
+                        ),
+                [xScale,yScale,xValue,yValue]
+                )}
                 <MarksLabel
-                    data={data}
+                    scaleDays={scaleDays}
+                    minDate={minDate}
                     dataLength={dataLength}
                     xScale={xScale}
                     yScale={yScale}
