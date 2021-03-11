@@ -44,7 +44,7 @@ const App = () => {
 	const width = 160*5.5;
 	const height = 160*4;
 
-	const margin = {top:40, right:100, bottom:70, left: 140};
+	const margin = {top:40, right:100, bottom:100, left: 180};
 
 	const data = useData();
 	const sepaldata = useFlower();
@@ -96,7 +96,7 @@ const App = () => {
 				/>
 			</svg>
     	</div>
-		
+
 		<div id="flowerscatter" class="container has-text-centered">
 			<div className="columns is-mobile is-centered">
 				<div className="column">

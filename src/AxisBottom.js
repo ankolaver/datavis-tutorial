@@ -17,7 +17,10 @@ export const AxisBottom = ({ xScale, innerWidth, innerHeight, tickFormat, xAxisL
             x={innerWidth / 2 - 90}
             y={innerHeight + 50} 
             >
-            {xAxisLabel}
+            {/* if-else ternary expression */}
+            {xAxisLabel.split(" ").length < 5 ? 
+            xAxisLabel : 
+            xAxisLabel.split(" ").slice(0,4).join(" ")+"\n"+xAxisLabel.split(" ").slice(4).join(" ")}
         </text>
         </>
 ));
