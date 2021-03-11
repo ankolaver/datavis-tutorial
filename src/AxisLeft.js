@@ -13,7 +13,30 @@ export const AxisLeft = ({yScale}) =>
         </g>
     ));
 
-export const AxisLeftFlower = ({yScale, innerHeight, yAxisLabel="No label"}) => 
+export const AxisRightScatter = ({y2Scale, innerHeight, innerWidth, yAxisLabel="No label"}) => 
+y2Scale.ticks().map(tickValue =>  (
+    <>
+    <g className="leftlabels">
+    <text 
+        key={tickValue}
+        style={{textAnchor:'end'}} 
+        x={innerWidth+40} 
+        dy=".32em"
+        y={y2Scale(tickValue)}
+    >
+        {tickValue}
+    </text>
+    </g>
+    <text
+        className="axis-lavel"
+        transform={`translate(${innerWidth+70}, ${innerHeight/1.4}) rotate(-90)`}
+        >
+        {yAxisLabel}    
+    </text>
+    </>
+));
+
+export const AxisLeftScatter = ({yScale, innerHeight, yAxisLabel="No label"}) => 
 yScale.ticks().map(tickValue =>  (
     <>
     <g className="leftlabels">
@@ -29,7 +52,7 @@ yScale.ticks().map(tickValue =>  (
     </g>
     <text
         className="axis-lavel"
-        transform={`translate(-60, ${innerHeight/2}) rotate(-90)`}
+        transform={`translate(-60, ${innerHeight/1.3}) rotate(-90)`}
         >
         {yAxisLabel}    
     </text>

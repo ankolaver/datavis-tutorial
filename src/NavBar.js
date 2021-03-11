@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export const NavBar = () => {
     
-    const [isActive, setisActive] = React.useState(false);
+    const [isActive, setisActive] = useState(false);
 
     return (
     <>

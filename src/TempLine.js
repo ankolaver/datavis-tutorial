@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import React, { useState , useCallback , useMemo } from 'react';
 import { MarksStock, MarksLabel} from './Marks';
-import { AxisLeftFlower } from './AxisLeft';
+import { AxisLeftScatter, AxisRightScatter } from './AxisLeft';
 import { AxisBottom } from './AxisBottom';
 
 
@@ -10,12 +10,12 @@ export const TempLine = ({data, width, height, margin}) => {
     const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
 
-    //const xValue = d => d.timestamp;
-    //const yValue = d => d.temperature;
     const xValue = d => d.Date;
-    const yAxisLabel = "Price";
-    const yValue = d => d.SP500;
+    const yAxisLabel = "SP500-Percent";
+    const yValue = d => d["SP500-Percent"];
 
+    const y2Value = d => d["CPI-Percent"];
+    const y2AxisLabel = "CPI-Percent";
     //.nice() make sure values end on suitable points
     const xScale = d3.scaleTime()
         .domain(d3.extent(data,xValue))
@@ -26,7 +26,12 @@ export const TempLine = ({data, width, height, margin}) => {
         .domain(d3.extent(data, yValue))
         .range([innerHeight,0])
         .nice();
-
+    
+    const y2Scale = d3.scaleLinear()
+        .domain(d3.extent(data, y2Value))
+        .range([innerHeight,0])
+        .nice();
+        
     const dataLength = data.length;
 
     const initialMousePosition = { x: width/2, y: height/2 };
@@ -52,19 +57,19 @@ export const TempLine = ({data, width, height, margin}) => {
                     tickFormat={n => d3.timeFormat("%Y")(n)}
                     xAxisLabel="Year"
                 />
-                <AxisLeftFlower yScale={yScale} innerHeight={innerHeight} yAxisLabel={yAxisLabel}/>
-                    {useMemo( 
-                () => (
+                <AxisLeftScatter yScale={yScale} innerHeight={innerHeight} yAxisLabel={yAxisLabel}/>
+                {useMemo( () => (
                 <MarksStock
                     data={data}
                     xScale={xScale}
                     yScale={yScale}
+                    y2Scale={y2Scale}
                     xValue={xValue}
                     yValue={yValue}
+                    y2Value={y2Value}
                 />
-                        ),
-                [xScale,yScale,xValue,yValue]
-                )}
+                ),[data, xScale, yScale, y2Scale])}
+                <AxisRightScatter y2Scale={y2Scale} innerWidth={innerWidth} innerHeight={innerHeight} yAxisLabel={y2AxisLabel}/>
                 <MarksLabel
                     scaleDays={scaleDays}
                     minDate={minDate}

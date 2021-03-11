@@ -44,7 +44,7 @@ const App = () => {
 	const width = 160*5.5;
 	const height = 160*4;
 
-	const margin = {top:70, right:100, bottom:70, left: 100};
+	const margin = {top:70, right:100, bottom:70, left: 150};
 
 	const data = useData();
 	const sepaldata = useFlower();
@@ -90,11 +90,12 @@ const App = () => {
 			<div className="column is-half">
 				<article class="message is-info">
 				<div class="message-header">
-					<p>View flower differences</p>
+					<p>Compare the environmental impact of different methods of food production</p>
 					<button class="delete" aria-label="delete"></button>
 				</div>
 				<div class="message-body">
 					Change the attributes in brackets
+					Food Production Emissions from https://www.kaggle.com/selfvivek/environment-impact-of-food-production.
 				</div>
 				</article>
 			</div>
@@ -105,7 +106,7 @@ const App = () => {
 		
 		<FlowerScatter 
 			data={sepaldata}
-			width={width+100}
+			width={width+200}
 			height={height}
 			margin={margin}
 		/>

@@ -1,5 +1,4 @@
 import {format, timeFormat, line} from 'd3';
-import { useMemo } from 'react';
 import * as d3 from 'd3';
 
 export const Marks = ({data, xScale, yScale, xValue, yValue}) => 
@@ -17,15 +16,18 @@ export const Marks = ({data, xScale, yScale, xValue, yValue}) =>
 ));
 
 export const MarksFlower = ({data, xScale, yScale, xValue, yValue, colorScale, colorValue}) => 
+    
     data.map(d => (
         <circle
             className="markflower"
             cx={xScale(xValue(d))}
             cy={yScale(yValue(d))}
-            r={5}
+            r={7}
             fill={colorScale(colorValue(d))}
         >
             <title>
+                {d[Object.keys(d)[0]]}
+                {"\n"}
                 {"x = "}{format(',.3r')(xValue(d))}
                 {"\n"}
                 {"y = "}{format(',.3r')(yValue(d))}
@@ -34,14 +36,12 @@ export const MarksFlower = ({data, xScale, yScale, xValue, yValue, colorScale, c
 ));
 
 
-export const MarksStock = ({data, xScale, yScale, xValue, yValue}) => {
+export const MarksStock = ({data, xScale, yScale, y2Scale, xValue, yValue, y2Value}) => {
     
     return (
         
         data.map(d => (
         <g className="marksstock">
-        
-        <>
         <path
             className="sppath"
             fill="none"
@@ -56,16 +56,19 @@ export const MarksStock = ({data, xScale, yScale, xValue, yValue}) => {
             cy={yScale(yValue(d))}
             fill="#0e834e"
             r={3}
-        >
-        </circle>
+        ></circle>
+        <circle
+            className="marksstock"
+            cx={xScale(xValue(d))}
+            cy={y2Scale(y2Value(d))}
+            fill="#E6842A"
+            r={3}
+        ></circle>
         <title>
             {"Year = "}{timeFormat("%B %Y")(xValue(d))}
             {"\n"}
             {"Price = "}{format(',.3r')(yValue(d))}
         </title>
-        </>
-        
-        
         </g>
 )) 
 )
@@ -86,7 +89,7 @@ function findY(path, x) {
     while (target >= start && target <= pathLength) {
       var pos = path.getPointAtLength(target)
   
-      if (Math.abs(pos.x - x) < 0.001) {
+      if (Math.abs(pos.x - x) < 1) {
         return pos.y
       } else if (pos.x > x) {
         end = target
