@@ -22,7 +22,7 @@ export const MarksFlower = ({data, xScale, yScale, xValue, yValue, colorScale, c
             className="markflower"
             cx={xScale(xValue(d))}
             cy={yScale(yValue(d))}
-            r={7}
+            r={10}
             fill={colorScale(colorValue(d))}
         >
             <title>
@@ -102,30 +102,40 @@ function findY(path, x) {
 
 
 
-export const MarksLabel = ({scaleDays, minDate, dataLength, xScale, yScale, mouseValue, innerWidth, innerHeight}) => {
+export const MarksLabel = (
+    {
+        scaleDays, 
+        minDate, 
+        dataLength, 
+        xScale, 
+        yScale, 
+        mouseValue, 
+        innerWidth, 
+        innerHeight
+    }) => {
     
     let spPrice = 0;
     let xPoint = 0;
+    let yPoint = 0;
 
-    let xData = Math.round(((mouseValue-250)/innerWidth) * dataLength);
+    let xData = Math.round(((mouseValue-440)/innerWidth) * dataLength);
     
     const path = d3.select("[class='sppath']");
 
     const maxPrice = yScale.invert(0);
     const minPrice = yScale.invert(innerHeight);
     const scalePrice = maxPrice-minPrice;
-    console.log(scalePrice);
     
     if ((xData>0) && (xData <= 268) && path.node()) {
         
-        var currtime = xScale.invert(mouseValue-250)-minDate;
+        var currtime = xScale.invert(mouseValue-440)-minDate;
         //spPrice = getYValue(currtime,data);
         
         xPoint = (currtime)/scaleDays;
         xPoint = xPoint*innerWidth;
         
-        spPrice = findY(path.node(),xPoint);
-        spPrice = innerHeight-spPrice;
+        yPoint = findY(path.node(),xPoint);
+        spPrice = innerHeight-yPoint;
         spPrice = ((spPrice/innerHeight) * scalePrice) + minPrice;
         //const regex = new RegExp(`${xPoint} ((\d*.\d*))`);
         //const match = regex.exec(path.node().d);
@@ -137,12 +147,13 @@ export const MarksLabel = ({scaleDays, minDate, dataLength, xScale, yScale, mous
     return (
         <>
         <text
-            className="axis-lavel"
-            x={innerWidth / 2 - 90}
-            y={innerHeight - 300} 
+            class="indicator"
+            x={mouseValue-420}
+            y={yPoint}
             >
-            {spPrice}
+            {spPrice.toFixed(2)}
         </text>
+        
         <g className="tickmove" key={xPoint} transform={`translate(${xPoint},0)`}>
             <line y2={innerHeight} stroke="orange" />
         </g>

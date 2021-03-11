@@ -57,9 +57,13 @@ label{
   font-size: 0.7em;
 }
 
-.axis-lavel{
+.axis-lavel, .indicator{
   font-weight: bold;
-  font-size: 1.8em;
+  font-size: 1.5em;
+  white-space: pre-wrap;
+}
+.indicator {
+  fill: #a6b5b9;
 }
 
 /* graph related */
@@ -70,4 +74,8 @@ label{
 .marksstock path{
   stroke-width: 3;
   stroke:#0e834e;
+}
+
+circle {
+  opacity: 0.6;
 }

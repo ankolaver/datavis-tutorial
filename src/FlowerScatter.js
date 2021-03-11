@@ -5,7 +5,8 @@ import { AxisLeftScatter } from './AxisLeft';
 import { AxisBottom } from './AxisBottom';
 import { Dropdown } from './Dropdown';
 import { ColorLegend } from './ColorLegend';
-
+import { range } from 'd3';
+/*
 const attributes = [
     { value:'Land use change Kg CO2', label:'Land use change Kg CO2'},
     { value:'Animal Feed Kg CO2', label:'Animal Feed Kg CO2'},
@@ -13,7 +14,8 @@ const attributes = [
     { value:'Processing Kg CO2', label:'Processing Kg CO2'},
     { value:'Transport Kg CO2', label:'Transport Kg CO2'}
 ];
-
+*/
+/*
 const getLabel = value => {
     for(let i = 0; i < attributes.length; i++){
       if(attributes[i].value === value){
@@ -21,10 +23,20 @@ const getLabel = value => {
       }
     }
   };
+*/
+const getLabel = value => {
+    /*
+    let head = value.split("per")[0];
+    let units = /\((.*?)\)/.exec(value);
+    console.log(head);
+    return head + units*/
+    return value;
+}
 
 export const FlowerScatter = ({data, width, height, margin}) => {
     
-
+    let attributes = data.columns;
+    console.log(attributes);
     const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
 
@@ -55,29 +67,43 @@ export const FlowerScatter = ({data, width, height, margin}) => {
         .domain(data.map(colorValue))
         .range(['#5C8100','#F6B656','#B396AD']);
     */
+    //create the color range of values
+    let colorRange = [];
+    for (let i=0; i<data.length; i++) {
+        let val = (1/data.length)*i;
+        colorRange.push(d3.interpolateTurbo(val));
+    } 
+
+    //map to a color scale
     const colorScale = d3.scaleOrdinal()
         .domain(data.map(colorValue))
-        .range(d3.schemeCategory10);
-    console.log(colorScale.domain())
+        .range(colorRange);
         
+    // use react hook to exclude hovered values
     const [hoveredValue, setHoveredValue] = useState(null);
     const filteredData = data.filter(d => hoveredValue === colorValue(d))
     return (
         <>
-        <label for="x-select">X:</label>
-        <Dropdown
-            options={attributes}
-            id="x-select"
-            selectedValue={xAttribute}
-            onSelectedValueChange={setXAttribute}
-        />
-        <label for="y-select">Y:</label>
-        <Dropdown
-            options={attributes}
-            id="y-select"
-            selectedValue={yAttribute}
-            onSelectedValueChange={setYAttribute}
-        />
+        <div class="columns is-desktop">
+            <div class="column is-half">
+                <label class="title is-5" for="x-select">X Axis Variable:</label>
+                <Dropdown
+                    options={attributes}
+                    id="x-select"
+                    selectedValue={xAttribute}
+                    onSelectedValueChange={setXAttribute}
+                />
+            </div>
+            <div class="column is-half">
+                <label class="title is-5" for="y-select">Y Axis Variable:</label>
+                <Dropdown
+                    options={attributes}
+                    id="y-select"
+                    selectedValue={yAttribute}
+                    onSelectedValueChange={setYAttribute}
+                />
+            </div>
+        </div>
         <svg width={width} height={height}>
         
         <g transform={`translate(${margin.left - 200},${margin.top})`}>

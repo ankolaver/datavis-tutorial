@@ -1,7 +1,8 @@
 export const ColorLegend = ({ colorScale,tickSpacing=10, tickSize=6, tickTextOffset=20, LegendTitle="Legend Title", onHover, hoveredValue, fadeOpacity=0.5}) => 
     colorScale.domain().map((domainValue, i) => (
         <>
-        <g transform={i%2==0 ? `translate(0, ${i * tickSpacing})`: `translate(100, ${i * tickSpacing})`} 
+        {/* allow data to be accomodated into 2 columns for scatter plot*/}
+        <g transform={i%2===0 ? `translate(0, ${i * tickSpacing})`: `translate(110, ${i * tickSpacing})`} 
             onMouseEnter={() => { onHover(domainValue)}} 
             onMouseOut={() => {onHover(null)}}
             opacity={hoveredValue && domainValue !== hoveredValue ? fadeOpacity : 1}

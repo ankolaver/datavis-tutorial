@@ -1,4 +1,11 @@
+![image](https://user-images.githubusercontent.com/47784720/110765608-44e64880-824c-11eb-921e-2bcdd1df45ac.png)
+
+## First Things First
+- Quality of data is v important
+
+
 ## Debug Log
+> Problems encountered while building website
 
 1.  Error: ENOSPC: System limit for number of file watchers reached, watch '/home/andante-moss/Documents/datavisu/public'
 
@@ -12,10 +19,12 @@ fs.inotify.max_user_watches=524288
 2. capitalisation / casing of items
 
 Faced an error, where JavaScript compiler stated that the casing was wrong
-![Screenshot from 2021-03-03 14-09-51.png](:/630771580df24edebd2357407621a69a)
+![image](https://user-images.githubusercontent.com/47784720/110766088-ba521900-824c-11eb-8ee1-4d1ad7ae5229.png)
 Similarly, the vairable name "discolored" in vsCode, indicating that it was no longer used in the scope of the function.
 
 3. Inputs must be enclosed in {} within the ()
+4. Dropdowns cannot be placed within svgs
+
 ## Learning Points
 
 * * *
@@ -73,6 +82,8 @@ src
 |	   |
 |	   |-- Blah_oldfile.js
 ```
+However, too much refactoring can mkae it difficult later on to change, eg. from Scatter to Bar chart as certain properties (eg. circle radius) are no longer relevant
+
 
 Also take note that each `return` function in a export can only export one "element". To export multiple items in a return, use the following `JSX` syntax.
 ```js
@@ -134,8 +145,6 @@ jsx code group elements
 	- categorical (distinct categories)
 	- ordinal (have an inherent order/spectrum) 
 	- quantitative (continuous distribution)
-- ![Screenshot from 2021-03-02 15-35-39.png](:/8e21196f870741f2948f82b785d7fddc)
-    - this does not make sense as year is a ordered attribute, but the colors make it look like a categorical attribute
-    - makes more sense to mark year by luminance
+
 - "get it right in black and white"
 - areas to represent multiple things (cumulative chart differentiated by color) --> evolved to steam graph for better visualisation

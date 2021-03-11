@@ -52,9 +52,11 @@ yScale.ticks().map(tickValue =>  (
     </g>
     <text
         className="axis-lavel"
-        transform={`translate(-60, ${innerHeight/1.3}) rotate(-90)`}
+        transform={`translate(-100, ${innerHeight/1.2}) rotate(-90)`}
         >
-        {yAxisLabel}    
+        {yAxisLabel.split(" ").length < 5 ? 
+            yAxisLabel : 
+            yAxisLabel.split(" ").slice(0,4).join(" ")+"\n"+yAxisLabel.split(" ").slice(4).join(" ")}    
     </text>
     </>
 ));

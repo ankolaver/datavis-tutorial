@@ -42,12 +42,13 @@ export const useFlower = () => {
         d.petal_length = +d.petal_length;
         d.petal_width = +d.petal_width;
 		*/ 
-		d["Land use change Kg CO2"] = +d["Land use change Kg CO2"];
-		d["Animal Feed Kg CO2"] = +d["Animal Feed Kg CO2"];
-		d["Farm Kg CO2"] = +d["Farm Kg CO2"];
-		d["Processing Kg CO2"] = +d["Processing Kg CO2"];
-		d["Transport Kg CO2"] = +d["Transport Kg CO2"];
-
+		//convert to float
+		for (const [key, value] of Object.entries(d)) {
+			if (!isNaN(value))  {
+				d[key] = +d[key];
+			}
+		  }
+		  
         return d
       };
       

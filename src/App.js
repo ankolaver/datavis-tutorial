@@ -44,7 +44,7 @@ const App = () => {
 	const width = 160*5.5;
 	const height = 160*4;
 
-	const margin = {top:70, right:100, bottom:70, left: 150};
+	const margin = {top:40, right:100, bottom:70, left: 140};
 
 	const data = useData();
 	const sepaldata = useFlower();
@@ -73,9 +73,20 @@ const App = () => {
 	return (
 		<>
 		<NavBar/>
-		
+		<br /><br /><br /><br />
 		<div class="container has-text-centered"> 
-			<svg width={width} height={height+100}>
+			<div className="columns is-mobile is-centered">
+				<div className="column">
+					<article class="message is-info">
+					<div class="message-header">
+						<p>Compare the population size of different countries</p>
+						<button class="delete" aria-label="delete"></button>
+					</div>
+					
+					</article>
+				</div>
+			</div>
+			<svg width={width+100} height={height+100}>
 				{/*added keys*/}
 				<CountryBar 
 					data={data}
@@ -85,34 +96,44 @@ const App = () => {
 				/>
 			</svg>
     	</div>
-
+		
+		<div id="flowerscatter" class="container has-text-centered">
+			<div className="columns is-mobile is-centered">
+				<div className="column">
+					<article class="message is-info">
+					<div class="message-header">
+						<p>Compare environmental impact of different methods of food production</p>
+						<button class="delete" aria-label="delete"></button>
+					</div>
+					<div class="message-body">
+						Change the attributes in brackets <br />
+						Food Production Emissions from https://www.kaggle.com/selfvivek/environment-impact-of-food-production.
+					</div>
+					</article>
+				</div>
+			</div>
+			<FlowerScatter 
+				data={sepaldata}
+				width={width+200}
+				height={height}
+				margin={margin}
+			/>
+		</div>
+		
+		<br/><br/><br/>
 		<div className="columns is-mobile is-centered">
 			<div className="column is-half">
 				<article class="message is-info">
 				<div class="message-header">
-					<p>Compare the environmental impact of different methods of food production</p>
+					<p>Compare S&P500 against the Consumer Price Index</p>
 					<button class="delete" aria-label="delete"></button>
-				</div>
-				<div class="message-body">
-					Change the attributes in brackets
-					Food Production Emissions from https://www.kaggle.com/selfvivek/environment-impact-of-food-production.
 				</div>
 				</article>
 			</div>
 		</div>
-
-
-		<div id="flowerscatter" class="container has-text-centered">
-		
-		<FlowerScatter 
-			data={sepaldata}
-			width={width+200}
-			height={height}
-			margin={margin}
-		/>
-		</div>
 		
 		<div id="stock">
+			
 		<TempLine 
 			data={tempdata}
 			width={width+400}

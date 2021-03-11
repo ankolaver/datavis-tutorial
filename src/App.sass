@@ -3,15 +3,17 @@
 
 // Set your brand colors
 $purple: #8e6c8a;
+$light-purple: #c9a2c4;
 $pink: #DF006c;
 $green: #5C8100;
 $orange: #E6842A;
 $blueish: #137B80;
+$grey-white: #e5e3e027;
 $white: #fff;
 $beige-independent: #708259;
 $light-grey: #C1BAA9;
 $blackish-grey: #27292e;
-    
+$light-green: #d4ffac;
 
 // Update Bulma's global variables
 $family-sans-serif: 'Nunito', sans-serif;
@@ -29,22 +31,26 @@ $navbar-padding-horizontal: 4rem;
 $gap: 16px;
 $container-offset: (4 * $gap);
 
+$column-gap: 4rem;
+
 //progress
 $progress-indeterminate-duration: 0.8s;
 
 //box
 $scheme-invert: $white;
-$box-shadow: 0 5em 1em -0.25em rgba($scheme-invert, 0.2), 0 0px 0 1px rgba($scheme-invert, 0.2);
+$box-background-color: $light-purple;
+$box-radius: 20px;
+$box-color: $white;
 
 // Update some of Bulma's component variables
 $body-background-color: $blackish-grey;
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
-$title-color: $light-grey;
 
 //title
 $subtitle-color: #d4ffac;
+$title-color: $light-grey;
 
 // Import only what you need from Bulma
 @import '../node_modules/bulma/sass/utilities/_all.sass';
@@ -58,6 +64,7 @@ $subtitle-color: #d4ffac;
 @import '../node_modules/bulma/sass/components/navbar.sass';
 @import '../node_modules/bulma/sass/components/message.sass';
 @import '../node_modules/bulma/sass/grid/columns.sass';
+@import '../node_modules/bulma/sass/elements/tag.sass';
 
 @import '../node_modules/bulma/sass/layout/hero.sass';
 @import '../node_modules/bulma/sass/layout/section.sass';
