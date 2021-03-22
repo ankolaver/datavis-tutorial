@@ -1,29 +1,34 @@
-![image](https://user-images.githubusercontent.com/47784720/110765608-44e64880-824c-11eb-921e-2bcdd1df45ac.png)
+![Screenshot from 2021-03-22 16-22-14](https://user-images.githubusercontent.com/47784720/111960644-e476c700-8ae7-11eb-96a9-d4f85e88b8f3.png)
+
 
 ## First Things First
-- Quality of data is v important
+- Important to scan through data first
 
 
 ## Debug Log
 > Problems encountered while building website
 
-1.  Error: ENOSPC: System limit for number of file watchers reached, watch '/home/andante-moss/Documents/datavisu/public'
+__1.  Error: ENOSPC: System limit for number of file watchers reached__
 
-to solve, `nano /etc/sysctl.conf` to configure max number of file watchers in vscode
+Solution: In Linux, open the file `/etc/sysctl.conf` (using a file editor of choice) to configure max number of file watchers in vscode as follows: 
 
 ```
 fs.inotify.max_user_watches=524288
 ```
+See https://stackoverflow.com/questions/62206460/jest-watch-error-enospc-system-limit-for-number-of-file-watchers-reached for more info.
 
-
-2. capitalisation / casing of items
+__2. capitalisation / casing of items__
 
 Faced an error, where JavaScript compiler stated that the casing was wrong
 ![image](https://user-images.githubusercontent.com/47784720/110766088-ba521900-824c-11eb-8ee1-4d1ad7ae5229.png)
-Similarly, the vairable name "discolored" in vsCode, indicating that it was no longer used in the scope of the function.
 
-3. Inputs must be enclosed in {} within the ()
-4. Dropdowns cannot be placed within svgs
+Solution: React JSX Components should be Capitalised.
+
+__3. Inputs must be enclosed in {} within the ()__
+__4. Dropdowns cannot be placed within svgs__
+__5. Application Lagging when trying to calculate intersection between `d3.curve` and line__
+	- There are no built in features to calculate intersection; see: https://stackoverflow.com/questions/15798566/d3-line-path-intersection
+	- Adapted an solution to use binary search + react Memoization to find intersection, but performance still slow.  
 
 ## Learning Points
 
