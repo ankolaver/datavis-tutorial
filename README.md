@@ -25,10 +25,13 @@ Faced an error, where JavaScript compiler stated that the casing was wrong
 Solution: React JSX Components should be Capitalised.
 
 __3. Inputs must be enclosed in {} within the ()__
+
 __4. Dropdowns cannot be placed within svgs__
+
 __5. Application Lagging when trying to calculate intersection between `d3.curve` and line__
-	- There are no built in features to calculate intersection; see: https://stackoverflow.com/questions/15798566/d3-line-path-intersection
-	- Adapted an solution to use binary search + react Memoization to find intersection, but performance still slow.  
+
+- There are no built in features to calculate intersection; see: https://stackoverflow.com/questions/15798566/d3-line-path-intersection
+- Adapted an solution to use binary search + react Memoization to find intersection, but performance still slow.  
 
 ## Learning Points
 
